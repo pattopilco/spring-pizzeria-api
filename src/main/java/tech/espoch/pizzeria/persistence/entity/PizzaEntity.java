@@ -26,7 +26,7 @@ public class PizzaEntity {
     private String name;
 
     @Column(nullable = false, length = 150)
-    private String descripcion;
+    private String description;
 
     @Column(nullable = false, columnDefinition = "Decimal(5,2)")
     private Double price;
