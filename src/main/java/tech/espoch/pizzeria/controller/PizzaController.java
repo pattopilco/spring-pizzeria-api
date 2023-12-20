@@ -2,7 +2,6 @@ package tech.espoch.pizzeria.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.espoch.pizzeria.persistence.entity.OrderEntity;
 import tech.espoch.pizzeria.persistence.entity.PizzaEntity;
 import tech.espoch.pizzeria.service.PizzaService;
 
@@ -57,9 +56,15 @@ public class PizzaController {
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAvailable() {
-        return ResponseEntity.ok(this.pizzaService.getAvailable());
+    public ResponseEntity<Page<PizzaEntity>> getAvailable(
+        @RequestParam(defaultValue = "0") int page, 
+        @RequestParam(defaultValue = "8") int elements,
+        @RequestParam(defaultValue = "name") String sortBy,
+        @RequestParam(defaultValue = "ASC") String sortDirection
+    ) {
+        return ResponseEntity.ok(this.pizzaService.getAvailable(page, elements, sortBy, sortDirection));
     }
+
     
     @PostMapping()
     public ResponseEntity<PizzaEntity> add(@RequestBody PizzaEntity pizza){

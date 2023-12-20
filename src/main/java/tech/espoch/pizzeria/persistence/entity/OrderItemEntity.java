@@ -1,7 +1,5 @@
 package tech.espoch.pizzeria.persistence.entity;
 
-import org.hibernate.annotations.ManyToAny;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;

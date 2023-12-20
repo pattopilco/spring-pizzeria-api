@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import tech.espoch.pizzeria.persistence.entity.PizzaEntity;
 import tech.espoch.pizzeria.persistence.repository.PizzaPagSortRepository;
 import tech.espoch.pizzeria.persistence.repository.PizzaRepository;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class PizzaService {
@@ -41,8 +42,10 @@ public class PizzaService {
         return this.pizzaRepository.existsById(idPizza);
     }
 
-    public List<PizzaEntity> getAvailable() {
-        return this.pizzaRepository.findAllByAvailableTrueOrderByPrice();
+    public Page<PizzaEntity> getAvailable(int page, int elements, String sortBy, String sortDirection) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        Pageable pageRequest = PageRequest.of(page, elements, sort);
+        return this.pizzaPagSortRepository.findByAvailableTrue(pageRequest);
     }
 
     public PizzaEntity getByName(String name){
