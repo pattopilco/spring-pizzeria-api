@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 
@@ -12,6 +13,7 @@ import tech.espoch.pizzeria.persistence.entity.PizzaEntity;
 import tech.espoch.pizzeria.persistence.repository.PizzaPagSortRepository;
 import tech.espoch.pizzeria.persistence.repository.PizzaRepository;
 import org.springframework.data.domain.Sort;
+import tech.espoch.pizzeria.service.dto.UpdatePizzaPriceDto;
 
 @Service
 public class PizzaService {
@@ -63,5 +65,9 @@ public class PizzaService {
         return this.pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(price);
     }
 
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDto newPizzaPrice){
+        this.pizzaRepository.updatePrice(newPizzaPrice);
+    }
 
 }

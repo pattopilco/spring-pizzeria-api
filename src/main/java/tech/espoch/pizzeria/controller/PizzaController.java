@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,8 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
+import tech.espoch.pizzeria.service.dto.UpdatePizzaPriceDto;
 
 
 @RestController
@@ -79,6 +79,15 @@ public class PizzaController {
         if(pizza.getIdPizza() != null || this.pizzaService.exists(pizza.getIdPizza())){
             return ResponseEntity.ok(this.pizzaService.save(pizza));
         } 
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/price")
+    public ResponseEntity<Void> updatePrice(@RequestBody UpdatePizzaPriceDto newPizzaPrice) {
+        if(this.pizzaService.exists(newPizzaPrice.getPizzaId())){
+            this.pizzaService.updatePrice(newPizzaPrice);
+            return ResponseEntity.ok().build();
+        }
         return ResponseEntity.badRequest().build();
     }
 
