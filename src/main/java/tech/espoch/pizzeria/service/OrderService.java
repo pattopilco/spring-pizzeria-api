@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tech.espoch.pizzeria.persistence.entity.OrderEntity;
+import tech.espoch.pizzeria.persistence.projection.OrderSummary;
 import tech.espoch.pizzeria.persistence.repository.OrderRepository;
 
 @Service
@@ -38,6 +39,10 @@ public class OrderService {
 
     public List<OrderEntity> getCustomerOrders(String idCustomer) {
         return this.orderRepository.getCustomerOrders(idCustomer);
+    }
+
+    public OrderSummary getSummary(int orderId) {
+        return this.orderRepository.findSummary(orderId);
     }
     
 }

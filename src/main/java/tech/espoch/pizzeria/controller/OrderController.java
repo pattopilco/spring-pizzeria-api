@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tech.espoch.pizzeria.persistence.entity.OrderEntity;
+import tech.espoch.pizzeria.persistence.projection.OrderSummary;
 import tech.espoch.pizzeria.service.OrderService;
 
 @RestController
@@ -34,11 +35,14 @@ public class OrderController {
         return ResponseEntity.ok(this.orderService.getOutsideOrders());
     }
 
-        @GetMapping("/customer/{idCustomer}")
+    @GetMapping("/customer/{idCustomer}")
     public ResponseEntity<List<OrderEntity>> getCustomerOrders(@PathVariable String idCustomer) {
         return ResponseEntity.ok(this.orderService.getCustomerOrders(idCustomer));
     }
 
-
+    @GetMapping("/summary/{orderId}")
+    public ResponseEntity<OrderSummary> getSummary(@PathVariable int orderId) {
+        return ResponseEntity.ok(this.orderService.getSummary(orderId));
+    }
     
 }
