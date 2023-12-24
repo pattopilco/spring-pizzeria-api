@@ -8,9 +8,11 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import tech.espoch.pizzeria.persistence.entity.OrderEntity;
 import tech.espoch.pizzeria.persistence.projection.OrderSummary;
 import tech.espoch.pizzeria.persistence.repository.OrderRepository;
+import tech.espoch.pizzeria.service.dto.RandomOrderDto;
 
 @Service
 public class OrderService {
@@ -44,5 +46,9 @@ public class OrderService {
     public OrderSummary getSummary(int orderId) {
         return this.orderRepository.findSummary(orderId);
     }
-    
+
+    @Transactional
+    public boolean saveRandomOrder(RandomOrderDto randomOrderDto){
+        return this.orderRepository.saveRandomOrder(randomOrderDto.getIdCustomer(), randomOrderDto.getMethod());
+    }
 }

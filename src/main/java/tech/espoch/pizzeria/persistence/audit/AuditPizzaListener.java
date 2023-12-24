@@ -6,7 +6,6 @@ import jakarta.persistence.PostUpdate;
 import jakarta.persistence.PreRemove;
 import org.springframework.util.SerializationUtils;
 import tech.espoch.pizzeria.persistence.entity.PizzaEntity;
-import tech.espoch.pizzeria.service.PizzaService;
 
 public class AuditPizzaListener {
 
