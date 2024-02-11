@@ -1,5 +1,5 @@
 FROM eclipse-temurin:latest
-USER  me
+USER 10001
 VOLUME /tmp
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
