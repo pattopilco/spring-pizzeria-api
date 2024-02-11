@@ -46,7 +46,59 @@ logging.level.org.springframework.security.web.*=debug
 ## DOCKER
 
 ```bash
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecret
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+volumes:
+  mysqldata:
+
+networks:
+  mysqlnet:
+```
+
+```bash
 docker-compose up
+```
+## DOCKERFILE
+
+```bash
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+
+${JAR_FILE}
+
+```bash
+
+docker build --build-arg JAR_FILE=build/libs/*.jar -t ppilco/pizzeria .
 ```
 
 ## SWAGGER
