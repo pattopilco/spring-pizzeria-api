@@ -119,6 +119,7 @@ docker build -t ppilco/pizzeria .
 ```bash
 # Build stage
 FROM gradle:7.3.3-jdk17 as build
+USER 10001
 WORKDIR /app
 COPY . /app
 RUN gradle build --no-daemon
