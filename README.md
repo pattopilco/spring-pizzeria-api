@@ -108,8 +108,24 @@ http://localhost:8080/swagger-ui/index.html
 
 ## CREAR IMAGEN DOCKER
 
+1. Sin configurar el archivo build.gradle
 ```bash
 chmod +x ./gradlew
 ./gradlew build
 docker build -t ppilco/pizzeria .
+```
+
+2. Configurando el archivo build.gradle
+```bash
+# Build stage
+FROM gradle:7.3.3-jdk17 as build
+WORKDIR /app
+COPY . /app
+RUN gradle build --no-daemon
+
+# Run stage
+FROM eclipse-temurin:17-jdk
+VOLUME /tmp
+COPY --from=build /app/build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 ```
