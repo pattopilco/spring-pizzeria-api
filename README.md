@@ -89,7 +89,7 @@ docker-compose up
 ```bash
 FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE
+#ARG JAR_FILE
 COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
@@ -106,3 +106,10 @@ docker build --build-arg JAR_FILE=build/libs/*.jar -t ppilco/pizzeria .
 http://localhost:8080/swagger-ui/index.html
 
 
+## CREAR IMAGEN DOCKER
+
+```bash
+chmod +x ./gradlew
+./gradlew build
+docker build -t ppilco/pizzeria .
+```
