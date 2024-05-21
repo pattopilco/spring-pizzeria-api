@@ -130,3 +130,8 @@ VOLUME /tmp
 COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
+
+## Docker run
+```bash
+docker run -it -p9099:8080 ppilco/pizzeria:latest
+```
