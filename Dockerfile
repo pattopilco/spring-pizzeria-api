@@ -3,6 +3,8 @@ FROM gradle:7.4-jdk17 as build
 WORKDIR /app
 COPY . /app
 ARG DB_HOST
+CMD echo "Hola ${DB_HOST}!"
+
 RUN gradle build --no-daemon
 
 # Run stage
