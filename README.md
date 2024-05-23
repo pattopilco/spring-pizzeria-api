@@ -131,7 +131,17 @@ COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
+
+## Docker build
+```bash
+docker build -t ppilco/pizzeria:latest .
+
+```
+
+
 ## Docker run
 ```bash
-docker run -it -p9099:8080 ppilco/pizzeria:latest
+
+ docker run -it -p 9099:8080 -e DB_HOST=34.70.125.230 ppilco/pizzeria:latest
+
 ```
