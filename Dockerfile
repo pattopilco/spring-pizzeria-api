@@ -1,6 +1,7 @@
 # Build stage
 FROM gradle:7.4-jdk17 as build
-ENV DB_HOST=34.70.125.230
+ARG DB_HOST
+ENV DB_HOST=$DB_HOST
 ENV DB_PORT=3306
 ENV DB_NAME=pizzeria
 ENV DB_USER=userdev
