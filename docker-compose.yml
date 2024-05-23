@@ -1,33 +1,13 @@
 version: '3'
-
 services:
-
-  mysql:
-    image: mysql
-    container_name: mysql
+  pizzeria-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - MYSQL_ROOT_PASSWORD=mysecret
-    volumes:
-      - mysqldata:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - mysqlnet
-    restart: on-failure
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
 
-  adminer:
-    image: adminer
-    container_name: adminer
-    depends_on:
-      - mysql
-    ports:
-      - "8080:8080"
-    networks:
-      - mysqlnet
-    restart: on-failure
-
-volumes:
-  mysqldata:
-
-networks:
-  mysqlnet:
