@@ -42,12 +42,10 @@ jobs:
     # Configure Workload Identity Federation and generate an access token.
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0'
+      uses: 'google-github-actions/auth@v2'
       with:
-        token_format: 'access_token'
+        project_id: ${{ secrets.GKE_PROJECT }}
         workload_identity_provider: 'projects/637625965620/locations/global/workloadIdentityPools/xpoch-pool/providers/xpoch-provider'
-        service_account: 'xpoch-service-account@ultra-glyph-422920-g7.iam.gserviceaccount.com'
-
     # Alternative option - authentication via credentials json
     # - id: 'auth'
     #   uses: 'google-github-actions/auth@v0'
