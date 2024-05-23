@@ -1,10 +1,5 @@
 # Build stage
 FROM gradle:7.4-jdk17 as build
-ENV DB_HOST=localhost
-ENV DB_PORT=3306
-ENV DB_NAME=pizzeria
-ENV DB_USER=user
-ENV DB_PASSWORD=password
 WORKDIR /app
 COPY . /app
 RUN gradle build --no-daemon
